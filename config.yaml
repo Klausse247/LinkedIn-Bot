@@ -1,0 +1,12 @@
+search:
+  keywords:
+    - security engineer
+    - cloud security
+  locations:
+    - Remote
+    - United States
+limits:
+  per_run: 5
+selenium:
+  headless: false
+  profile_dir: "/home/kevin/.config/google-chrome"  # adjust if needed
