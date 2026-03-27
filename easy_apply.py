@@ -4,6 +4,7 @@ from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+import os
 
 CONFIG_PATH = Path(__file__).with_name("config.yaml")
 
@@ -35,7 +36,11 @@ def get_driver(cfg):
         # opts.add_argument("--disable-dev-shm-usage")
         # opts.add_argument("--disable-gpu")
         # opts.add_argument("--remote-debugging-port=9222")
-    service = Service(log_path="chromedriver.log")
+    service = Service(
+        executable_path="/usr/local/bin/chromedriver",
+        log_path="chromedriver_verbose.log",
+        service_args=["--verbose", "--log-path=chromedriver_verbose.log"]
+        )
     driver = webdriver.Chrome(service=service, options=opts)
     driver.maximize_window()
     return driver
