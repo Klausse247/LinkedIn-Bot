@@ -17,6 +17,10 @@ def get_driver(cfg):
     profile_dir = cfg["selenium"].get("profile_dir")
     if profile_dir:
         opts.add_argument(f"--user-data-dir={profile_dir}")
+        opts.add_argument("--no-sandbox")
+        opts.add_argument("--disable-dev-shm-usage")
+        opts.add_argument("--disable-gpu")
+        opts.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=opts)
     driver.maximize_window()
     return driver
