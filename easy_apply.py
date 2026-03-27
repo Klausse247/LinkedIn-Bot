@@ -13,16 +13,18 @@ def load_config():
 
 def get_driver(cfg):
     opts = Options()
+    opts.add_argument("--headless=new")  # Force headless first
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
     opts.add_argument("--disable-gpu")
-    opts.add_argument("--disable-extensions")
+    opts.add_argument("--disable-software-rasterizer")
+    opts.add_argument("--disable-background-networking")
     opts.add_argument("--disable-background-timer-throttling")
-    opts.add_argument("--disable-backgrounding-occluded-windows")
     opts.add_argument("--disable-renderer-backgrounding")
+    opts.add_argument("--disable-features=TranslateUI")
+    opts.add_argument("--disable-ipc-flooding-protection")
     opts.add_argument("--log-level=0")
-    opts.add_argument("--enable-logging")
-    opts.add_argument("--v=1")  # Verbose logging
+    opts.add_argument("--enable-logging=stderr")
     
     if cfg["selenium"].get("headless", False):
         opts.add_argument("--headless=new")
