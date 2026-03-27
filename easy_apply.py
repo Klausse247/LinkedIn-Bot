@@ -12,15 +12,27 @@ def load_config():
 
 def get_driver(cfg):
     opts = Options()
+    opts = Options()
+    opts.add_argument("--no-sandbox")
+    opts.add_argument("--disable-dev-shm-usage")
+    opts.add_argument("--disable-gpu")
+    opts.add_argument("--disable-extensions")
+    opts.add_argument("--disable-background-timer-throttling")
+    opts.add_argument("--disable-backgrounding-occluded-windows")
+    opts.add_argument("--disable-renderer-backgrounding")
+    opts.add_argument("--log-level=0")
+    opts.add_argument("--enable-logging")
+    opts.add_argument("--v=1")  # Verbose logging
+    
     if cfg["selenium"].get("headless", False):
         opts.add_argument("--headless=new")
     profile_dir = cfg["selenium"].get("profile_dir")
     if profile_dir:
         opts.add_argument(f"--user-data-dir={profile_dir}")
-        opts.add_argument("--no-sandbox")
-        opts.add_argument("--disable-dev-shm-usage")
-        opts.add_argument("--disable-gpu")
-        opts.add_argument("--remote-debugging-port=9222")
+        # opts.add_argument("--no-sandbox")
+        # opts.add_argument("--disable-dev-shm-usage")
+        # opts.add_argument("--disable-gpu")
+        # opts.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=opts)
     driver.maximize_window()
     return driver
