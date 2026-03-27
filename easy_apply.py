@@ -8,7 +8,7 @@ opts.add_argument("--disable-dev-shm-usage")
 
 service = Service()  # Auto‑finds chromedriver
 driver = webdriver.Chrome(service=service, options=opts)
-driver.get("https://www.google.com")
+driver.get("https://linkedin.com/jobs")
 print("✅ Success! Title:", driver.title)
 input("Press Enter to close...")
 driver.quit()
