@@ -3,6 +3,7 @@ import yaml
 from pathlib import Path
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 CONFIG_PATH = Path(__file__).with_name("config.yaml")
 
@@ -11,7 +12,6 @@ def load_config():
         return yaml.safe_load(f)
 
 def get_driver(cfg):
-    opts = Options()
     opts = Options()
     opts.add_argument("--no-sandbox")
     opts.add_argument("--disable-dev-shm-usage")
@@ -33,7 +33,8 @@ def get_driver(cfg):
         # opts.add_argument("--disable-dev-shm-usage")
         # opts.add_argument("--disable-gpu")
         # opts.add_argument("--remote-debugging-port=9222")
-    driver = webdriver.Chrome(options=opts)
+    service = Service(log_path="chromedriver.log")
+    driver = webdriver.Chrome(service=service, options=opts)
     driver.maximize_window()
     return driver
 
