@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-USERNAME = os.environ["kevcoop1999@gmail.com"]
-PASSWORD = os.environ["Bengal$18"]
+USERNAME = os.environ["LINKEDIN_USERNAME"]
+PASSWORD = os.environ["LINKEDIN_PASSWORD"]
 
 opts = Options()
 opts.add_argument("--no-sandbox")
