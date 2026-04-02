@@ -43,8 +43,22 @@ try:
     # Submit
     wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
     
-    print("Logged in? Current URL:", driver.current_url)
-    input("Press Enter to close...")
+    WebDriverWait(driver, 20).until(lambda d: d.current_url != "https://www.linkedin.com/login") # Wait until URL changes from login page, indicating a successful login or redirection to a checkpoint.
+    current_url = driver.current_url
+    page_source = driver.page_source.lower()
 
+    print("Current URL:", current_url)
+
+    if "checkpoint" in current_url or "challenge" in current_url:
+        print("⚠️ LinkedIn wants verification/checkpoint.")
+    elif "/feed" in current_url or "/in/" in current_url or "linkedin.com/" in current_url:
+        if "sign in" not in page_source and "incorrect password" not in page_source:
+            print("✅ Login looks successful.")
+        else:
+            print("❌ Login may have failed.")
+    else:
+        print("⚠️ Unknown post-login state.")
+
+    input("Press Enter to close...")
 finally:
     driver.quit()
