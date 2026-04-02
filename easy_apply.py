@@ -6,8 +6,12 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-USERNAME = os.environ["LINKEDIN_USERNAME"]
-PASSWORD = os.environ["LINKEDIN_PASSWORD"]
+USERNAME = os.environ.get("LINKEDIN_USERNAME")
+PASSWORD = os.environ.get("LINKEDIN_PASSWORD")
+
+if not USERNAME or not PASSWORD:
+    print("Please set LINKEDIN_USERNAME and LINKEDIN_PASSWORD environment variables.")
+    exit(1)
 
 opts = Options()
 opts.add_argument("--no-sandbox")
